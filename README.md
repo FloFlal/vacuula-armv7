@@ -81,6 +81,7 @@ We provide you with a couple of ways to set up the server
 - To see logs do `docker compose logs vacuula`
 - To stop vacuula `docker compose down`
 - To start vacuula `docker compose up -d`
+- To update vacuula `docker compose pull`
 - To permanently remove stored data `docker volume rm vacuula-data` <i>Vacuula needs to be stopped first</i>
 
 
@@ -98,10 +99,10 @@ We have made an easy to use installer to set your robot up!
 - <i>Download by clicking the os link, table shows tested/verified systems</i>
 - <i>Linux: run `sudo usermod -aG dialout $USER` to give your user dialout, then reboot your computer!</i>
 
-[windows]:   https://github.com/vacuula/installer/releases/latest/download/VacuulaInstaller--windows.exe
-[linux]:     https://github.com/vacuula/installer/releases/latest/download/VacuulaInstaller--linux.AppImage
-[mac-arm]:   https://github.com/vacuula/installer/releases/latest/download/VacuulaInstaller--macos-arm64.zip
-[mac-intel]: https://github.com/vacuula/installer/releases/latest/download/VacuulaInstaller--macos-intel.zip
+[windows]:   https://github.com/vacuula/installer/releases/latest/download/VacuulaInstaller-windows.exe
+[linux]:     https://github.com/vacuula/installer/releases/latest/download/VacuulaInstaller-linux.AppImage
+[mac-arm]:   https://github.com/vacuula/installer/releases/latest/download/VacuulaInstaller-macos-arm64.zip
+[mac-intel]: https://github.com/vacuula/installer/releases/latest/download/VacuulaInstaller-macos-intel.zip
 
 <i>Source code is available at https://github.com/vacuula/installer</i>
 <br><i>If you have a more exotic setup and cannot run this installer in any way - get in touch and we will figure something out!</i>
