@@ -111,7 +111,7 @@ We have made an easy to use installer to set your robot up!
 ### Ports used by default
 | Port | Option       | Used by                                                    |
 |------|--------------|------------------------------------------------------------|
-| 80   | VACUULA_PORT | Server, Webapp, Installer. (HTTP, reverse proxy for HTTPS) |
+| 8050 | VACUULA_PORT | Server, Webapp, Installer. (HTTP, reverse proxy for HTTPS) |
 | 335  | GEN3_PORT    | Gen3 robots, D3-D7                                         |
 | 3443 | GEN4_PORT    | Gen4 robots, D8-D10                                        |
 
@@ -122,12 +122,13 @@ We have made an easy to use installer to set your robot up!
 |--------------|---------|---------------------------------------------------------------------------------------------------------------------|
 | GEN3_PORT    | 335     | Default port the Gen3 robots will connect to the server on                                                          |
 | GEN4_PORT    | 3443    | Default port the Gen4 robots will connect to the server on                                                          |
-| VACUULA_PORT | 80      | Default port that you can reach the webapp/api on                                                                   |
+| VACUULA_PORT | 8050    | Default port that you can reach the webapp/api on                                                                   |
 | GEN3_ENABLED | True    | If server should support for Gen3 robots                                                                            |
 | GEN4_ENABLED | True    | If server should support for Gen4 robots                                                                            |
 | MDNS_ENABLED | True    | If server should run MDNS for auto-discovering                                                                      |
 | TZ           | Etc/UTC | If timezone of computer cannot get fetched, please set this to the correct timezone for schedules to work correctly |
 | HOST_IP      | 0.0.0.0 | What IP the Vacuula server hosts to, useful if you have multiple IP addresses                                       |
+| LOG_LEVEL    | info    | debug|info|warning|error                                                                                            |
 
 ### Platform architecture
 We have currently only tested and verified on `ARM 64-bit` and `x86 64-bit`. However, we want the server to support at least `ARM 32-bit` and possibly `x86 32-bit` as well. We are looking into what we can do to make sure these platforms are also supported. The main reason behind wanting to support them is that the server can run on older SBCs. 
