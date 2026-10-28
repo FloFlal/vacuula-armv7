@@ -14,7 +14,7 @@ COPY app/ ./
 RUN pnpm vite build
 
 
-FROM --platform=$BUILDPLATFORM python:3.14-slim AS python-build
+FROM python:3.14-slim AS python-build
 
 RUN pip install uv
 
@@ -36,7 +36,7 @@ RUN uv sync --frozen --no-dev --no-editable
 
 
 # final server image
-FROM --platform=$BUILDPLATFORM python:3.14-slim
+FROM python:3.14-slim
 
 WORKDIR /server
 
