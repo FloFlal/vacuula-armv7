@@ -14,7 +14,7 @@ COPY app/ ./
 RUN pnpm vite build
 
 
-FROM python:3.14-slim AS python-build
+FROM --platform=$BUILDPLATFORM python:3.14-slim AS python-build
 
 RUN pip install uv
 
