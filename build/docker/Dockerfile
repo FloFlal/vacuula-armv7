@@ -1,6 +1,10 @@
 # frontend
 FROM --platform=$BUILDPLATFORM node:22-alpine AS frontend
 
+ENV CFLAGS="-Wl,-z,max-page-size=65536"
+ENV LDFLAGS="-Wl,-z,max-page-size=65536"
+ENV RUSTFLAGS="-C link-arg=-Wl,-z,max-page-size=65536"
+
 WORKDIR /app
 
 RUN corepack enable
@@ -15,6 +19,10 @@ RUN pnpm vite build
 
 
 FROM --platform=$BUILDPLATFORM python:3.14-slim AS python-build
+
+ENV CFLAGS="-Wl,-z,max-page-size=65536"
+ENV LDFLAGS="-Wl,-z,max-page-size=65536"
+ENV RUSTFLAGS="-C link-arg=-Wl,-z,max-page-size=65536"
 
 RUN pip install uv
 
@@ -37,6 +45,10 @@ RUN uv sync --frozen --no-dev --no-editable
 
 # final server image
 FROM python:3.14-slim
+
+ENV CFLAGS="-Wl,-z,max-page-size=65536"
+ENV LDFLAGS="-Wl,-z,max-page-size=65536"
+ENV RUSTFLAGS="-C link-arg=-Wl,-z,max-page-size=65536"
 
 WORKDIR /server
 
