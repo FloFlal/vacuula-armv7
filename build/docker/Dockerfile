@@ -18,7 +18,7 @@ COPY app/ ./
 RUN pnpm vite build
 
 
-FROM --platform=$BUILDPLATFORM python:3.14-slim AS python-build
+FROM python:3.14-slim AS python-build
 
 ENV CFLAGS="-Wl,-z,max-page-size=65536"
 ENV LDFLAGS="-Wl,-z,max-page-size=65536"
