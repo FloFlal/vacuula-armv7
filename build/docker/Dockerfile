@@ -14,9 +14,9 @@ COPY app/ ./
 RUN pnpm vite build
 
 
-FROM python:3.14-slim AS python-build
+FROM --platform=$BUILDPLATFORM python:3.14-slim AS python-build
 
-COPY --from=ghcr.io/astral-sh/uv:0.12 /uv /uvx /bin/
+RUN pip install uv
 
 WORKDIR /server
 
@@ -36,7 +36,7 @@ RUN uv sync --frozen --no-dev --no-editable
 
 
 # final server image
-FROM python:3.14-slim
+FROM --platform=$BUILDPLATFORM python:3.14-slim
 
 WORKDIR /server
 
