@@ -13,14 +13,14 @@ COPY app/ ./
 
 RUN pnpm vite build
 
-FROM ubuntu:22.04 AS new-python
+FROM ubuntu:26.04 AS new-python
 
-ENV CFLAGS="-Wl,-z,max-page-size=65536"
-ENV LDFLAGS="-Wl,-z,max-page-size=65536"
-ENV RUSTFLAGS="-C link-arg=-Wl,-z,max-page-size=65536"
+ENV CFLAGS="-Wl,-z,max-page-size=65536" \
+        LDFLAGS="-Wl,-z,max-page-size=65536" \
+        RUSTFLAGS="-C link-arg=-Wl,-z,max-page-size=65536"
 
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
-        ca-certificates python-3.14 curl openssl \
+        ca-certificates python3.14 curl openssl \
         && rm -rf /var/lib/apt/lists/*
 
 FROM new-python AS python-build
