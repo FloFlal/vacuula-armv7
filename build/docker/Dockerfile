@@ -1,10 +1,6 @@
 # frontend
 FROM --platform=$BUILDPLATFORM node:22-alpine AS frontend
 
-ENV CFLAGS="-Wl,-z,max-page-size=65536"
-ENV LDFLAGS="-Wl,-z,max-page-size=65536"
-ENV RUSTFLAGS="-C link-arg=-Wl,-z,max-page-size=65536"
-
 WORKDIR /app
 
 RUN corepack enable
@@ -17,8 +13,17 @@ COPY app/ ./
 
 RUN pnpm vite build
 
+FROM ubuntu:22.04 AS new-python
 
-FROM python:3.14-slim AS python-build
+ENV CFLAGS="-Wl,-z,max-page-size=65536"
+ENV LDFLAGS="-Wl,-z,max-page-size=65536"
+ENV RUSTFLAGS="-C link-arg=-Wl,-z,max-page-size=65536"
+
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+        ca-certificates python-3.14 curl openssl \
+        && rm -rf /var/lib/apt/lists/*
+
+FROM new-python AS python-build
 
 ENV CFLAGS="-Wl,-z,max-page-size=65536"
 ENV LDFLAGS="-Wl,-z,max-page-size=65536"
@@ -44,18 +49,13 @@ RUN uv sync --frozen --no-dev --no-editable
 
 
 # final server image
-FROM python:3.14-slim
+FROM new-python
 
 ENV CFLAGS="-Wl,-z,max-page-size=65536"
 ENV LDFLAGS="-Wl,-z,max-page-size=65536"
 ENV RUSTFLAGS="-C link-arg=-Wl,-z,max-page-size=65536"
 
 WORKDIR /server
-
-# tools
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends curl openssl \
-    && rm -rf /var/lib/apt/lists/*
 
 ENV PATH="/server/.venv/bin:$PATH" PYTHONUNBUFFERED=1
 
